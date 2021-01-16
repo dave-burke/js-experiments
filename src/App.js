@@ -112,19 +112,19 @@ function App() {
     const a = Number(newStack.shift())
     switch(op) {
       case '+':
-        newStack.push(a + b)
+        newStack.unshift(a + b)
         setLastOp(`${a} + ${b} = ${newStack[0]}`)
         break;
       case '-':
-        newStack.push(a - b)
+        newStack.unshift(a - b)
         setLastOp(`${a} - ${b} = ${newStack[0]}`)
         break;
       case '*':
-        newStack.push(a * b)
+        newStack.unshift(a * b)
         setLastOp(`${a} * ${b} = ${newStack[0]}`)
         break;
       case '/':
-        newStack.push(a / b)
+        newStack.unshift(a / b)
         setLastOp(`${a} / ${b} = ${newStack[0]}`)
         break;
       default:
