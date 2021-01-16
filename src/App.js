@@ -1,36 +1,26 @@
-import { Component } from 'react';
+import { useState } from 'react'
 import './App.css';
 import StackList from './StackList';
 
-class App extends Component {
-  constructor() {
-    super()
-    this.state = {
-      input: '',
-      stack: [],
-    }
-    this.handleInputchange = this.handleInputchange.bind(this)
-    this.handlePushClick = this.handlePushClick.bind(this)
-    this.handleEvalButton = this.handleEvalButton.bind(this)
-    this.canEval = this.canEval.bind(this)
-    this.handleKeyUp = this.handleKeyUp.bind(this)
-  }
+function App() {
+  const [input, setInput] = useState('')
+  const [stack, setStack] = useState([])
 
-  canEval() {
-    return this.state.stack.length >= 2
+  function canEval() {
+    return stack.length >= 2
   }
   
-  handleKeyUp(e) {
+  function handleKeyUp(e) {
     const { key } = e
     switch(key) {
       case 'Enter':
-        this.handlePushClick()
+        handlePushClick()
         break;
       case '+':
       case '-':
       case '*':
       case '/':
-        this.doEval(key)
+        doEval(key)
         break;
       default:
         // noop
@@ -38,36 +28,31 @@ class App extends Component {
     }
   }
 
-  handleInputchange(e) {
+  function handleInputchange(e) {
     let value = e.target.value
     if(!/^-?[0123456789.]*$/.test(value)) {
       e.preventDefault();
     } else {
-      this.setState(state => ({
-        input: value,
-      }))
+      setInput(value)
     }
   }
 
-  handlePushClick() {
-    if(this.state.input !== '') {
-      this.setState(state => ({
-        input: '',
-        stack: [Number(state.input), ...state.stack]
-      }));
+  function handlePushClick() {
+    if(input !== '') {
+      setInput('')
+      setStack([Number(input), ...stack])
     }
-    this.inputEl.focus()
   }
 
-  handleEvalButton(e) {
-    this.doEval(e.target.innerText)
+  function handleEvalButton(e) {
+    doEval(e.target.innerText)
   }
 
-  doEval(op) {
-    if(!this.canEval()) {
+  function doEval(op) {
+    if(!canEval()) {
       return
     }
-    const [a, b] = this.state.stack
+    const [a, b] = stack
     let result
     switch(op) {
       case '+':
@@ -85,37 +70,31 @@ class App extends Component {
       default:
         throw new Error('Unknown op')
     }
-    this.setState(state => ({
-      stack: [result, ...this.state.stack.slice(2)]
-    }))
-    this.inputEl.focus()
+    setStack([result, ...stack.slice(2)])
   }
 
-  render() {
-    return (
-      <div className="App">
-        <p>
-          Number:
-          <input
-            type="text"
-            ref={inputEl => (this.inputEl = inputEl)}
-            onKeyUp={this.handleKeyUp}
-            onChange={this.handleInputchange}
-            value={this.state.input}
-          ></input>
-          <button onClick={this.handlePushClick}>Push</button>
-        </p>
-        <p>
-          <button disabled={!this.canEval()} onClick={this.handleEvalButton}>+</button>
-          <button disabled={!this.canEval()} onClick={this.handleEvalButton}>-</button>
-          <button disabled={!this.canEval()} onClick={this.handleEvalButton}>*</button>
-          <button disabled={!this.canEval()} onClick={this.handleEvalButton}>/</button>
-        </p>
-        { this.canEval() || <p>(Operators disabled until there are at least two numbers on the stack)</p>}
-        <StackList stack={this.state.stack}></StackList>
-      </div>
-    );
-  }
+  return (
+    <div className="App">
+      <p>
+        Number:
+        <input
+          type="text"
+          onKeyUp={handleKeyUp}
+          onChange={handleInputchange}
+          value={input}
+        ></input>
+        <button onClick={handlePushClick}>Push</button>
+      </p>
+      <p>
+        <button disabled={!canEval()} onClick={handleEvalButton}>+</button>
+        <button disabled={!canEval()} onClick={handleEvalButton}>-</button>
+        <button disabled={!canEval()} onClick={handleEvalButton}>*</button>
+        <button disabled={!canEval()} onClick={handleEvalButton}>/</button>
+      </p>
+      { canEval() || <p>(Operators disabled until there are at least two numbers on the stack)</p>}
+      <StackList stack={stack}></StackList>
+    </div>
+  );
 }
 
 export default App;
