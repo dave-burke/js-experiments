@@ -53,3 +53,14 @@ button.square {
   width: 2em;
   height: 2em;
 }
+
+.stackList {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  height: 10rem;
+  overflow-y: scroll;
+}
+.stackList_spacer {
+  flex: 1 0 auto;
+}
