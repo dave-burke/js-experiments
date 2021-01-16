@@ -45,6 +45,10 @@ button {
   color: black;
 }
 
+button[disabled] {
+  background: gray;
+}
+
 button.square {
   width: 2em;
   height: 2em;

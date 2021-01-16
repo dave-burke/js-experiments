@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css';
 import StackList from './StackList';
 
@@ -6,8 +6,32 @@ function App() {
   const [stack, setStack] = useState([''])
   const [lastOp, setLastOp] = useState('')
 
+  function handleKeyUp(e) {
+    console.log(e)
+    const { key } = e
+    if(key === 'Enter') {
+      handleEnterClick()
+    }
+    if(key === 'Backspace') {
+      handleBackspace()
+    }
+    if(!Number.isNaN(Number(key))) {
+      pushNumber(key)
+    }
+    if(['+', '-', '*', '/'].includes(key)) {
+      doEval(key)
+    }
+  }
+
+  useEffect(() => {
+    document.body.addEventListener('keyup', handleKeyUp)
+    return function cleanup() {
+      document.body.removeEventListener('keyup', handleKeyUp)
+    }
+  })
+
   function canEval() {
-    return stack.length >= 2
+    return stack.filter(n => n !== '').length >= 2
   }
   
   function handleEnterClick() {
@@ -22,9 +46,20 @@ function App() {
     pushNumber(e.target.innerText)
   }
 
-  function handleNegateButton(e) {
+  function handleNegateButton() {
     setStack([
       '-' + stack[0],
+      ...stack.slice(1),
+    ])
+  }
+
+  function handleBackspace() {
+    let first = stack[0]
+    if(first.length > 1) {
+      first = first.slice(0, first.length - 1)
+    }
+    setStack([
+      first,
       ...stack.slice(1),
     ])
   }
@@ -34,17 +69,6 @@ function App() {
       stack[0] + n, // string concatenation
       ...stack.slice(1)
     ])
-  }
-
-  function handleKeyUp(e) {
-    const { key } = e
-    console.log(`handling ${key}`)
-    if(key === 'Enter') {
-      handleEnterClick()
-    }
-    if(!Number.isNaN(Number(key))) {
-      pushNumber(key)
-    }
   }
 
   function doEval(op) {
@@ -110,11 +134,14 @@ function App() {
         <button className="square" disabled={!canEval()} onClick={handleEvalButton}>/</button>
       </div>
       <div>
+        <button onClick={handleBackspace}>Backspace</button>
+      </div>
+      <div>
         <button onClick={handleEnterClick}>Enter</button>
       </div>
+      <p>Last operation was: {lastOp}</p>
+      <p>Stack = {JSON.stringify(stack)}</p>
       { canEval() || <p>(Operators disabled until there are at least two numbers on the stack)</p>}
-      <p>{lastOp}</p>
-      <p>{JSON.stringify(stack)}</p>
     </div>
   );
 }
