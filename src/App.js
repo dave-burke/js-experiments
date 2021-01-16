@@ -43,7 +43,9 @@ function App() {
   }
   
   function handleEnterClick() {
-    setStack(['', ...stack])
+    if(stack[0] !== '') {
+      setStack(['', ...stack])
+    }
   }
 
   function handleEvalButton(e) {
