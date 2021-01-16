@@ -28,7 +28,7 @@ function App() {
 
   useEffect(() => {
     document.body.addEventListener('keyup', handleKeyUp)
-    return function cleanup() {
+    return () => {
       document.body.removeEventListener('keyup', handleKeyUp)
     }
   })
