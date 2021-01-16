@@ -11,14 +11,17 @@ function App() {
     const { key } = e
     if(key === 'Enter') {
       handleEnterClick()
-    }
-    if(key === 'Backspace') {
+    } else if(key === 'Backspace') {
       handleBackspace()
-    }
-    if(!Number.isNaN(Number(key))) {
+    }else if(!Number.isNaN(Number(key))) {
       pushNumber(key)
-    }
-    if(['+', '-', '*', '/'].includes(key)) {
+    } else if(key === '-') {
+      if(stack[0] === '') {
+        pushNumber(key)
+      } else {
+        doEval(key)
+      }
+    } else if(['+', '*', '/'].includes(key)) {
       doEval(key)
     }
   }
