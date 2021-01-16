@@ -6,29 +6,32 @@ function App() {
   const [stack, setStack] = useState([''])
   const [lastOp, setLastOp] = useState('')
 
-  function handleKeyUp(e) {
-    console.log(e)
-    const { key } = e
-    if(key === 'Enter') {
-      handleEnterClick()
-    } else if(key === 'Backspace') {
-      handleBackspace()
-    }else if(!Number.isNaN(Number(key))) {
-      pushNumber(key)
-    } else if(key === '-') {
-      if(stack[0] === '') {
-        pushNumber(key)
-      } else {
-        doEval(key)
-      }
-    } else if(['+', '*', '/'].includes(key)) {
-      doEval(key)
-    }
-  }
 
   useEffect(() => {
+    function handleKeyUp(e) {
+      console.log(e)
+      const { key } = e
+      if(key === 'Enter') {
+        handleEnterClick()
+      } else if(key === 'Backspace') {
+        handleBackspace()
+      }else if(!Number.isNaN(Number(key))) {
+        pushNumber(key)
+      } else if(key === '-') {
+        if(stack[0] === '') {
+          pushNumber(key)
+        } else {
+          doEval(key)
+        }
+      } else if(['+', '*', '/'].includes(key)) {
+        doEval(key)
+      }
+    }
+
+    console.log('addEventListener')
     document.body.addEventListener('keyup', handleKeyUp)
     return () => {
+      console.log('removeEventListener')
       document.body.removeEventListener('keyup', handleKeyUp)
     }
   })
@@ -108,7 +111,7 @@ function App() {
   }
 
   return (
-    <div className="App" onKeyUp={handleKeyUp}>
+    <div className="App">
       <StackList stack={stack}></StackList>
       <div>
         <button className="square" onClick={handleNumberButton}>7</button>
