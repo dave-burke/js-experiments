@@ -23,6 +23,8 @@ function App() {
         } else {
           doEval(key)
         }
+      } else if(key === '.') {
+        pushNumber('.')
       } else if(['+', '*', '/'].includes(key)) {
         doEval(key)
       }
@@ -68,6 +70,25 @@ function App() {
       first,
       ...stack.slice(1),
     ])
+  }
+
+  function handleSwap() {
+    if(!canEval) return
+
+    const newStack = [...stack]
+    if(newStack[0] === '') {
+      newStack.shift()
+    }
+    if(newStack.length > 1) {
+      const a = newStack.shift()
+      const b = newStack.shift()
+      newStack.unshift(a)
+      newStack.unshift(b)
+      if(stack[0] === '') {
+        newStack.unshift('')
+      }
+      setStack(newStack)
+    }
   }
 
   function pushNumber(n) {
@@ -138,6 +159,9 @@ function App() {
         <button className="square" disabled={!canEval()} onClick={handleEvalButton}>-</button>
         <button className="square" disabled={!canEval()} onClick={handleEvalButton}>*</button>
         <button className="square" disabled={!canEval()} onClick={handleEvalButton}>/</button>
+      </div>
+      <div>
+        <button disabled={!canEval()} onClick={handleSwap}>Swap</button>
       </div>
       <div>
         <button onClick={handleBackspace}>Backspace</button>
