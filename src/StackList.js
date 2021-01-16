@@ -1,9 +1,10 @@
 function StackList(props) {
-    return (
-        <ul>
-          {props.stack.map((n, index) => <li key={index}>{n}</li>)}
-        </ul>
-    )
+  const reversed = [...props.stack].reverse()
+  return (
+    <div>
+      {reversed.filter(n => n !== '').map((n, index) => <p key={index}>{n}</p>)}
+    </div>
+  )
 }
 
 export default StackList

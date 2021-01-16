@@ -36,3 +36,16 @@
     transform: rotate(360deg);
   }
 }
+
+button {
+  display: inline-block;
+  border: 1px solid black;
+  background: darkgray;
+  margin: 0.1rem;
+  color: black;
+}
+
+button.square {
+  width: 2em;
+  height: 2em;
+}
