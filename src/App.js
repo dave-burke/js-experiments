@@ -64,14 +64,18 @@ function App() {
   }
 
   function handleBackspace() {
-    let first = stack[0]
-    if(first.length > 1) {
+    const newStack = [...stack]
+    let first = newStack.shift()
+    if(first.length > 0) {
+      // if first entry not blank, backspace a character from it and put it back
       first = first.slice(0, first.length - 1)
+      newStack.unshift(first)
+    } else {
+      // first entry was blank (invisible), so remove an actual value
+      newStack.shift()
+      newStack.unshift(first) // put the blank value back
     }
-    setStack([
-      first,
-      ...stack.slice(1),
-    ])
+    setStack(newStack)
   }
 
   function handleSwap() {
