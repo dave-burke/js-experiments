@@ -2,11 +2,16 @@
 import { ref } from 'vue'
 import Header from './components/Header.vue'
 import TodoInput from './components/TodoInput.vue'
+import TodoList from './components/TodoList.vue'
 
 const newTodo = ref('')
 
+const todos = ref([])
+
 function handleNewTodo() {
   console.log(`Save '${newTodo.value}`)
+  todos.value.push({id: new Date().getDate(), text: newTodo.value, status: 'ACTIVE'})
+  newTodo.value = ''
 }
 
 </script>
@@ -14,7 +19,7 @@ function handleNewTodo() {
 <template>
   <Header/>
   <TodoInput v-model="newTodo" @save="handleNewTodo"/>
-  <p>"{{newTodo}}"</p>
+  <TodoList :todos="todos"></TodoList>
 </template>
 
 <style>
