@@ -10,8 +10,12 @@ const todos = ref([])
 
 function handleNewTodo() {
   console.log(`Save '${newTodo.value}`)
-  todos.value.push({id: new Date().getDate(), text: newTodo.value, status: 'ACTIVE'})
+  todos.value.push({id: Date.now(), text: newTodo.value, status: 'ACTIVE'})
   newTodo.value = ''
+}
+
+function handleDelete(e) {
+  todos.value = todos.value.filter(item => item.id !== e.id)
 }
 
 </script>
@@ -19,7 +23,7 @@ function handleNewTodo() {
 <template>
   <Header/>
   <TodoInput v-model="newTodo" @save="handleNewTodo"/>
-  <TodoList :todos="todos"></TodoList>
+  <TodoList :todos="todos" @delete="handleDelete"></TodoList>
 </template>
 
 <style>
