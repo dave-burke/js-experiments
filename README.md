@@ -6,7 +6,7 @@ Requirements
     - [ ] Mark all done button
 - [ ] Display list of TODOs
     - [ ] Mark todo as 'done'
-    - [ ] Delete todo
+    - [x] Delete todo
 - [ ] Footer
     - [ ] Count incomplete
     - [ ] Filter 'all' 'active' 'complete'
