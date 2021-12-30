@@ -9,7 +9,6 @@ const newTodo = ref('')
 const todos = ref([])
 
 function handleNewTodo() {
-  console.log(`Save '${newTodo.value}`)
   todos.value.push({id: Date.now(), text: newTodo.value, status: 'ACTIVE'})
   newTodo.value = ''
 }
