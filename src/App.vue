@@ -21,11 +21,20 @@ function handleUpdateStatus(e) {
   todos.value.find(item => item.id === e.todo.id).status = e.newStatus
 }
 
+function handleMarkAllDone() {
+  if(todos.value.every(item => item.status === 'DONE')) {
+    todos.value.forEach(item => item.status = 'ACTIVE')
+  } else {
+    todos.value.forEach(item => item.status = 'DONE')
+  }
+}
+
 </script>
 
 <template>
   <Header/>
   <TodoInput v-model="newTodo" @save="handleNewTodo"/>
+  <button @click="handleMarkAllDone">Toggle all 'Done'</button>
   <TodoList :todos="todos"
     @delete="handleDelete"
     @update-status="handleUpdateStatus"

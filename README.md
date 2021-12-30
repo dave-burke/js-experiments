@@ -3,9 +3,9 @@
 Requirements
 
 - [x] Input to add a todo (on 'enter' key)
-    - [ ] Mark all done button
-- [ ] Display list of TODOs
-    - [ ] Mark todo as 'done'
+    - [x] Mark all done button
+- [x] Display list of TODOs
+    - [x] Mark todo as 'done'
     - [x] Delete todo
 - [ ] Footer
     - [ ] Count incomplete
