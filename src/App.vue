@@ -5,11 +5,15 @@ import TodoInput from './components/TodoInput.vue'
 
 const newTodo = ref('')
 
+function handleNewTodo() {
+  console.log(`Save '${newTodo.value}`)
+}
+
 </script>
 
 <template>
   <Header/>
-  <TodoInput v-model="newTodo"/>
+  <TodoInput v-model="newTodo" @save="handleNewTodo"/>
   <p>"{{newTodo}}"</p>
 </template>
 

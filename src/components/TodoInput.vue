@@ -3,6 +3,7 @@
         <input type="text" placeholder="What needs to be done?"
             :value="modelValue"
             @input="emit('update:model-value', $event.target.value)"
+            @keypress.enter="emit('save')"
         />
     </div>
 </template>
@@ -13,6 +14,6 @@ const props = defineProps({
     modelValue: String,
 })
 
-const emit = defineEmits(['update:model-value'])
+const emit = defineEmits(['update:model-value', 'save'])
 
 </script>
