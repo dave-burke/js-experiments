@@ -1,7 +1,10 @@
 <template>
     <ul>
         <li v-for="todo in todos" :key="todo.id">
-            <TodoItem :todo="todo" @delete="emit('delete', todo)"></TodoItem>
+            <TodoItem :todo="todo"
+                @delete="emit('delete', todo)"
+                @update-status="emit('updateStatus', { todo, newStatus: $event })"
+            ></TodoItem>
         </li>
     </ul>
 </template>
@@ -10,5 +13,5 @@ import TodoItem from './TodoItem.vue';
 const props = defineProps({
     todos: Array,
 })
-const emit = defineEmits(['delete'])
+const emit = defineEmits(['delete', 'updateStatus'])
 </script>

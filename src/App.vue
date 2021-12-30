@@ -17,12 +17,19 @@ function handleDelete(e) {
   todos.value = todos.value.filter(item => item.id !== e.id)
 }
 
+function handleUpdateStatus(e) {
+  todos.value.find(item => item.id === e.todo.id).status = e.newStatus
+}
+
 </script>
 
 <template>
   <Header/>
   <TodoInput v-model="newTodo" @save="handleNewTodo"/>
-  <TodoList :todos="todos" @delete="handleDelete"></TodoList>
+  <TodoList :todos="todos"
+    @delete="handleDelete"
+    @update-status="handleUpdateStatus"
+  ></TodoList>
 </template>
 
 <style>
