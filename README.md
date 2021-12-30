@@ -8,7 +8,7 @@ Requirements
     - [x] Mark todo as 'done'
     - [x] Delete todo
 - [ ] Footer
-    - [ ] Count incomplete
+    - [x] Count incomplete
     - [ ] Filter 'all' 'active' 'complete'
     - [ ] 'Clear complete' (only show if at least one is complete)
 

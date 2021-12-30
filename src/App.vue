@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import Header from './components/Header.vue'
 import TodoInput from './components/TodoInput.vue'
 import TodoList from './components/TodoList.vue'
+import Footer from './components/Footer.vue'
 
 const newTodo = ref('')
 
@@ -39,6 +40,7 @@ function handleMarkAllDone() {
     @delete="handleDelete"
     @update-status="handleUpdateStatus"
   ></TodoList>
+  <Footer :todos="todos"></Footer>
 </template>
 
 <style>
