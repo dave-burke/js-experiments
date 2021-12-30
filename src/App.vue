@@ -1,9 +1,16 @@
 <script setup>
+import { ref } from 'vue'
 import Header from './components/Header.vue'
+import TodoInput from './components/TodoInput.vue'
+
+const newTodo = ref('')
+
 </script>
 
 <template>
   <Header/>
+  <TodoInput v-model="newTodo"/>
+  <p>"{{newTodo}}"</p>
 </template>
 
 <style>
