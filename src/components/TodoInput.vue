@@ -2,7 +2,7 @@
     <div>
         <input type="text" placeholder="What needs to be done?"
             :value="modelValue"
-            @input="handleChange"
+            @input="emit('update:model-value', $event.target.value)"
         />
     </div>
 </template>
@@ -14,9 +14,5 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['update:model-value'])
-
-const handleChange = (e) => {
-    emit('update:model-value', e.target.value)
-}
 
 </script>
