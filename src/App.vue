@@ -29,6 +29,10 @@ function handleMarkAllDone() {
     todos.value.forEach(item => item.status === 'DONE')
   }
 }
+
+function handleClearComplete() {
+  todos.value = todos.value.filter(item => item.status !== 'DONE')
+}
 </script>
 
 <template>
@@ -36,7 +40,7 @@ function handleMarkAllDone() {
   <TodoInput v-model="newTodo" @save="handleNewTodo" />
   <button @click="handleMarkAllDone">Toggle all 'Done'</button>
   <TodoList :todos="todos" @delete="handleDelete" @update-status="handleUpdateStatus"></TodoList>
-  <AppFooter :todos="todos"></AppFooter>
+  <AppFooter :todos="todos" @clear-complete="handleClearComplete"></AppFooter>
 </template>
 
 <style>
