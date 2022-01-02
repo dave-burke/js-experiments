@@ -2,14 +2,16 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
+    'vue/setup-compiler-macros': true,
   },
-  extends: ['plugin:vue/essential', 'airbnb-base', 'prettier'],
+  extends: ['plugin:vue/vue3-recommended', 'airbnb-base', 'prettier'],
   parserOptions: {
     ecmaVersion: 13,
     sourceType: 'module',
   },
   plugins: ['vue'],
   rules: {
+    'vue/script-setup-uses-vars': 'error', // Avoid no-unused-vars for vars used only in template
     'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
     'no-console': ['warn'],
     'no-restricted-syntax': [
