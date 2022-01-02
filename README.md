@@ -3,14 +3,14 @@
 Requirements
 
 - [x] Input to add a todo (on 'enter' key)
-    - [x] Mark all done button
+  - [x] Mark all done button
 - [x] Display list of TODOs
-    - [x] Mark todo as 'done'
-    - [x] Delete todo
+  - [x] Mark todo as 'done'
+  - [x] Delete todo
 - [ ] Footer
-    - [x] Count incomplete
-    - [ ] Filter 'all' 'active' 'complete'
-    - [ ] 'Clear complete' (only show if at least one is complete)
+  - [x] Count incomplete
+  - [ ] Filter 'all' 'active' 'complete'
+  - [ ] 'Clear complete' (only show if at least one is complete)
 
 ## Template
 
