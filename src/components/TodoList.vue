@@ -11,8 +11,12 @@
 </template>
 <script setup>
 import TodoItem from './TodoItem.vue'
-const props = defineProps({
-  todos: Array,
+
+defineProps({
+  todos: {
+    type: Array,
+    required: true,
+  },
 })
 const emit = defineEmits(['delete', 'updateStatus'])
 </script>

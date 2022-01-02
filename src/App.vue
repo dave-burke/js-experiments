@@ -1,9 +1,9 @@
 <script setup>
 import { ref } from 'vue'
-import Header from './components/Header.vue'
+import AppHeader from './components/AppHeader.vue'
 import TodoInput from './components/TodoInput.vue'
 import TodoList from './components/TodoList.vue'
-import Footer from './components/Footer.vue'
+import AppFooter from './components/AppFooter.vue'
 
 const newTodo = ref('')
 
@@ -24,19 +24,19 @@ function handleUpdateStatus(e) {
 
 function handleMarkAllDone() {
   if (todos.value.every(item => item.status === 'DONE')) {
-    todos.value.forEach(item => (item.status = 'ACTIVE'))
+    todos.value.forEach(item => item.status === 'ACTIVE')
   } else {
-    todos.value.forEach(item => (item.status = 'DONE'))
+    todos.value.forEach(item => item.status === 'DONE')
   }
 }
 </script>
 
 <template>
-  <Header />
+  <AppHeader />
   <TodoInput v-model="newTodo" @save="handleNewTodo" />
   <button @click="handleMarkAllDone">Toggle all 'Done'</button>
   <TodoList :todos="todos" @delete="handleDelete" @update-status="handleUpdateStatus"></TodoList>
-  <Footer :todos="todos"></Footer>
+  <AppFooter :todos="todos"></AppFooter>
 </template>
 
 <style>

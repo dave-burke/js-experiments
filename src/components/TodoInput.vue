@@ -10,10 +10,11 @@
   </div>
 </template>
 <script setup>
-import { ref } from 'vue'
-
-const props = defineProps({
-  modelValue: String,
+defineProps({
+  modelValue: {
+    type: String,
+    default: '',
+  },
 })
 
 const emit = defineEmits(['update:model-value', 'save'])

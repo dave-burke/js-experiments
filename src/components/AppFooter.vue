@@ -5,7 +5,10 @@
 import { computed } from 'vue'
 
 const props = defineProps({
-  todos: Array,
+  todos: {
+    type: Array,
+    required: true,
+  },
 })
 
 const nIncomplete = computed(() => props.todos.filter(item => item.status === 'ACTIVE').length)

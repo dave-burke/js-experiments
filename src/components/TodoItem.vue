@@ -9,7 +9,10 @@
 import { computed } from 'vue'
 
 const props = defineProps({
-  todo: Object,
+  todo: {
+    type: Object,
+    required: true,
+  },
 })
 
 const emit = defineEmits(['delete', 'updateStatus'])
